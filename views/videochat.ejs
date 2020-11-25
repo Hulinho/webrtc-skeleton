@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<div class="w3-container">
+    <div class="w3-row w3-gray video-container">
+        <div class="w3-col w3-center m6 s12">
+            <video id="remoteVideo" autoplay playsinline controls="false"/>
+        </div>
+        <div id="rv-container" class="w3-col w3-center m6 s12">
+            <video id="localVideo" autoplay playsinline controls="false"/>
+        </div>
+    </div>
+</div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    const socket = io();
+    const room = '<%- room %>';
+</script>
+<script src="/js/videochat.js"></script>
+</body>
+</html>

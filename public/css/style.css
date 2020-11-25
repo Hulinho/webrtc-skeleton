@@ -1,0 +1,15 @@
+.video-container {
+    margin-top: 100px;
+}
+
+#remoteVideo {
+    height: 300px;
+    width: 400px;
+    background-color: black;
+}
+
+#localVideo {
+    height: 300px;
+    width: 400px;
+    background-color: black;
+}
