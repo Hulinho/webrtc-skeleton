@@ -3,7 +3,7 @@ const peerConnection = new RTCPeerConnection(configuration);
 const localVideo = document.querySelector('video#localVideo');
 const contstraints = {
     'video': true,
-    'audio': false,
+    'audio': true,
 };
 const remoteVideo = document.querySelector('#remoteVideo');
 const remoteStream = new MediaStream();
