@@ -1,7 +1,7 @@
 exports.index_get = (req, res) => {
-    res.render('index', { title: 'Videokukkancs', room_id: req.sessionID });
+    res.render('index', { title: 'Webrtc skeleton', room_id: req.sessionID });
 }
 
 exports.room_get = (req, res) => {
-    res.render('videochat', { title: 'Videochat', room: req.params.room });
+    res.render('videochat', { title: 'Webrtc videochat', room: req.params.room });
 }
