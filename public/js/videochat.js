@@ -11,7 +11,7 @@ remoteVideo.srcObject = remoteStream;
 socket.emit('room', {room: room});
 document.getElementById('rv-container').style.display = "none";
 
-(async () => {
+async function init() {
     try {
         const localStream = await navigator.mediaDevices.getUserMedia(contstraints);
         localVideo.srcObject = localStream;
@@ -25,7 +25,9 @@ document.getElementById('rv-container').style.display = "none";
     } catch (error) {
         console.error('Error opening video camera.', error);
     }
-})();
+}
+
+init();
 
 socket.on('message', async (msg) => {
     document.getElementById('remoteVideo').style.display = "inline-block";
