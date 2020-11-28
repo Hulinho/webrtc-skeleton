@@ -26,4 +26,4 @@ Web based video chat software skeleton, written in node.js
 - Set the "node_server_http_protocol" to "https"
 - Set the "node_server_port" to "443"
 - You have to set your full path of your SSL private key and certificate
-- You need root privileges to start the program(e.g. sudo server.js)
+- You need root privileges to start the program(e.g. sudo node server.js)
