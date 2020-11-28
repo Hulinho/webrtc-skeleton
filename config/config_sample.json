@@ -1,13 +1,13 @@
 {
   "development": {
-    "node_server_http_protocol": "http",
-    "node_server_port": 3000,
+    "node_server_http_protocol": "https",
+    "node_server_port": 443,
     "private_key": "",
     "certificate": ""
   },
   "production": {
-    "node_server_http_protocol": "http",
-    "node_server_port": 3000,
+    "node_server_http_protocol": "https",
+    "node_server_port": 443,
     "private_key": "",
     "certificate": ""
   }
