@@ -9,6 +9,7 @@ const remoteVideo = document.querySelector('#remoteVideo');
 const remoteStream = new MediaStream();
 remoteVideo.srcObject = remoteStream;
 socket.emit('room', {room: room});
+document.getElementById('rv-container').style.display = "none";
 
 (async () => {
     try {
@@ -31,8 +32,7 @@ socket.on('message', async (msg) => {
     console.log(msg);
     if(msg.too_many_users) {
         document.getElementById('remoteVideo').style.display = "none";
-        document.getElementById('rv-container').innerText = 'Too many users!';
-        return false;
+        alert("Not connected! Max 2 users in 1 room!");
     }
     if (msg.offer) {
         await peerConnection.setRemoteDescription(new RTCSessionDescription(msg.offer));
@@ -68,6 +68,7 @@ peerConnection.addEventListener('icecandidate', event => {
 peerConnection.addEventListener('connectionstatechange', event => {
     if (peerConnection.connectionState === 'connected') {
         // Peers connected!
+        document.getElementById('rv-container').style.display = "block";
         console.log('Peers connected!');
     }
 });
