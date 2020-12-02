@@ -1,10 +1,9 @@
 module.exports = (io) => {
     let count_users = [];
-    let myroom = null;
+    let myroom = false;
+    let tmu = false;
 
     io.on('connection', (socket) => {
-        // console.log('a user connected');
-
         socket.on('room', (msg) => {
             myroom = msg.room;
             count_users.push(myroom);
@@ -16,8 +15,10 @@ module.exports = (io) => {
             });
 
             if(i <= 2) {
+                tmu = false;
                 socket.join(myroom);
             } else {
+                tmu = true;
                 socket.emit('message', {'too_many_users': true});
             }
         });
@@ -27,9 +28,10 @@ module.exports = (io) => {
         });
 
         socket.on('video-chat-room', (msg) => {
-            socket.to(myroom).emit('message', msg);
+            if(tmu === false) {
+                socket.to(myroom).emit('message', msg);
+            }
         });
-
     });
 
 }

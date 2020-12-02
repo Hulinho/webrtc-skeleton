@@ -1,41 +1,38 @@
-const configuration = {'iceServers': [{'urls': 'stun:stun.l.google.com:19302'}]}
-const peerConnection = new RTCPeerConnection(configuration);
-const localVideo = document.querySelector('#localVideo');
-const contstraints = {
-    'video': true,
-    'audio': true,
-};
-const remoteVideo = document.querySelector('#remoteVideo');
-const remoteStream = new MediaStream();
-remoteVideo.srcObject = remoteStream;
-socket.emit('room', {room: room});
-document.getElementById('rv-container').style.display = "none";
+const peerConnection = new RTCPeerConnection(JSON.parse(ice_config));
+
+init();
 
 async function init() {
+    socket.emit('room', {room: room});
+    document.getElementById('rv-container').style.display = "none";
+
     try {
-        const localStream = await navigator.mediaDevices.getUserMedia(contstraints);
+        const localVideo = document.querySelector('#localVideo');
+        const localStream = await navigator.mediaDevices.getUserMedia({ 'video': true, 'audio': true });
         localVideo.srcObject = localStream;
         localStream.getTracks().forEach(track => {
             peerConnection.addTrack(track, localStream);
         });
+    } catch (error) {
+        console.error(error);
+    }
 
+    try {
         const offer = await peerConnection.createOffer();
         await peerConnection.setLocalDescription(offer);
         socket.emit('video-chat-room', {offer: offer});
     } catch (error) {
-        console.error('Error opening video camera.', error);
+        console.error(error);
     }
 }
 
-init();
 
 socket.on('message', async (msg) => {
-    document.getElementById('remoteVideo').style.display = "inline-block";
-    console.log(msg);
     if(msg.too_many_users) {
         document.getElementById('remoteVideo').style.display = "none";
         alert("Not connected! Max 2 users in 1 room!");
     }
+
     if (msg.offer) {
         await peerConnection.setRemoteDescription(new RTCSessionDescription(msg.offer));
         const answer = await peerConnection.createAnswer();
@@ -76,5 +73,8 @@ peerConnection.addEventListener('connectionstatechange', event => {
 });
 
 peerConnection.addEventListener('track', async (event) => {
+    const remoteStream = new MediaStream();
+    const remoteVideo = document.querySelector('#remoteVideo');
+    remoteVideo.srcObject = remoteStream;
     remoteStream.addTrack(event.track);
 });
