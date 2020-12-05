@@ -33,18 +33,25 @@ socket.on('message', async (msg) => {
     }
 
     if (msg.offer) {
-        await peerConnection.setRemoteDescription(new RTCSessionDescription(msg.offer));
-        const answer = await peerConnection.createAnswer();
-        await peerConnection.setLocalDescription(answer);
-        socket.emit('video-chat-room', {answer: answer});
+        try {
+            await peerConnection.setRemoteDescription(new RTCSessionDescription(msg.offer));
+            const answer = await peerConnection.createAnswer();
+            await peerConnection.setLocalDescription(answer);
+            socket.emit('video-chat-room', {answer: answer});
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     if (msg.answer) {
-        const remoteDesc = new RTCSessionDescription(msg.answer);
-        await peerConnection.setRemoteDescription(remoteDesc);
+        try {
+            const remoteDesc = new RTCSessionDescription(msg.answer);
+            await peerConnection.setRemoteDescription(remoteDesc);
+        } catch (error) {
+            console.error(error);
+        }
     }
 
-    // Listen for remote ICE candidates and add them to the local RTCPeerConnection
     if (msg.iceCandidate) {
         try {
             await peerConnection.addIceCandidate(msg.iceCandidate);
@@ -54,7 +61,6 @@ socket.on('message', async (msg) => {
     }
 });
 
-// Listen for local ICE candidates on the local RTCPeerConnection
 peerConnection.addEventListener('icecandidate', event => {
     if (event.candidate) {
         socket.emit('video-chat-room', {iceCandidate: event.candidate});
@@ -62,7 +68,6 @@ peerConnection.addEventListener('icecandidate', event => {
     }
 });
 
-// Listen for connectionstatechange on the local RTCPeerConnection
 peerConnection.addEventListener('connectionstatechange', event => {
     if (peerConnection.connectionState === 'connected') {
         // Peers connected!
