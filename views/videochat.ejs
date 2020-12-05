@@ -3,7 +3,7 @@
 <head>
     <title><%= title %></title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="robots" content="noindex, nofollow">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -12,13 +12,14 @@
 </head>
 
 <body>
+
 <div id="container">
-    <div id="rv-container" class="w3-black w3-center video-container">
-        <video id="remoteVideo" autoplay playsinline controls="false"/>
-    </div>
-    <div id="lv-container" class="w3-black w3-center video-container">
-        <video id="localVideo" autoplay playsinline controls="false"/>
-    </div>
+        <div id="lv-container" class="">
+            <video id="localVideo" autoplay playsinline controls="false"/>
+        </div>
+        <div id="rv-container" class="w3-center w3-black">
+            <video id="remoteVideo" autoplay playsinline controls="false"/>
+        </div>
 </div>
 
 <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>

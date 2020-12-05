@@ -1,11 +1,10 @@
 const peerConnection = new RTCPeerConnection(JSON.parse(ice_config));
+const remoteVideo = document.querySelector('#remoteVideo');
 
 init();
 
 async function init() {
     socket.emit('room', {room: room});
-    document.getElementById('rv-container').style.display = "none";
-
     try {
         const localVideo = document.querySelector('#localVideo');
         const localStream = await navigator.mediaDevices.getUserMedia({ 'video': true, 'audio': true });
@@ -67,14 +66,23 @@ peerConnection.addEventListener('icecandidate', event => {
 peerConnection.addEventListener('connectionstatechange', event => {
     if (peerConnection.connectionState === 'connected') {
         // Peers connected!
-        document.getElementById('rv-container').style.display = "block";
+        document.querySelector('#remoteVideo').style.display = "inline-block";
         console.log('Peers connected!');
     }
 });
 
 peerConnection.addEventListener('track', async (event) => {
     const remoteStream = new MediaStream();
-    const remoteVideo = document.querySelector('#remoteVideo');
     remoteVideo.srcObject = remoteStream;
     remoteStream.addTrack(event.track);
 });
+
+remoteVideo.onresize = function() {
+    if(remoteVideo.videoWidth > remoteVideo.videoHeight) {
+        remoteVideo.style.width = '100%';
+        remoteVideo.style.maxHeight = '100%';
+    } else {
+        remoteVideo.style.maxWidth = '100%';
+        remoteVideo.style.height = '100%';
+    }
+};

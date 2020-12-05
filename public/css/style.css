@@ -1,38 +1,40 @@
-html,
-body,
-#container {
-    height: 100%;
-}
-.video-container {
-    height: 100%;
+
+
+#localVideo {
+    max-height: 25%;
+    max-width: 25%;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1;
 }
 
 #remoteVideo {
-    margin-top: 100px;
-    max-height: 300px;
-    max-width: 400px;
+    display: none;
 }
 
-#localVideo {
-    margin-top: 100px;
-    max-height: 300px;
-    max-width: 400px;
-}
+/*@media screen and (max-width: 600px) {*/
+/*    .video-container {*/
+/*        margin-top: 0;*/
+/*    }*/
 
-@media screen and (max-width: 400px) {
-    .video-container {
-        margin-top: 0;
-    }
+/*    .video-header {*/
+/*        margin-top: 0;*/
+/*    }*/
 
-    #remoteVideo {
-        margin-top: 0;
-        max-height: 100%;
-        max-width: 100%;
-    }
+/*    #remoteVideo {*/
+/*        margin-top: 0;*/
+/*        max-height: 100%;*/
+/*        max-width: 100%;*/
+/*    }*/
 
-    #localVideo {
-        margin-top: 0;
-        max-height: 100%;
-        max-width: 100%;
-    }
-}
+/*    #localVideo {*/
+/*        margin-top: 0;*/
+/*        max-height: 25%;*/
+/*        max-width: 25%;*/
+/*        position: fixed;*/
+/*            right: 0;*/
+/*            top: 0;*/
+/*        z-index: 1;*/
+/*    }*/
+/*}*/
