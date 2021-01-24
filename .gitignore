@@ -1,6 +1,4 @@
 /000-default.conf
 /node_modules
-/certs
 config.json
 .idea
-package-lock.json
