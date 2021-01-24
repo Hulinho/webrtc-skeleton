@@ -10,6 +10,7 @@ RUN apt-get update && \
 RUN a2enmod ssl
 RUN a2enmod rewrite
 RUN a2enmod proxy
+RUN a2enmod proxy_http
 
 EXPOSE 443
 
