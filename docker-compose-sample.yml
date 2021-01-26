@@ -1,0 +1,8 @@
+version: '2'
+services:
+  webrtc_skeleton:
+    build: .
+    ports:
+      - "3000:443"
+    volumes:
+     - ./certs:/etc/certs
