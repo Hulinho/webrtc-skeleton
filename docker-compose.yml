@@ -3,6 +3,6 @@ services:
   webrtc_skeleton:
     build: .
     ports:
-      - "3000:443"
+      - "443:443"
     volumes:
      - ./certs:/etc/certs
