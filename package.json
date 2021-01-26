@@ -1,6 +1,6 @@
 {
   "name": "Webrtc-skeleton",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "Web based video chat software skeleton",
   "main": "index.js",
   "scripts": {

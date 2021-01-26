@@ -2,8 +2,8 @@
   "development": {
     "node_server_http_protocol": "https",
     "node_server_port": 443,
-    "private_key": "",
-    "certificate": "",
+    "private_key": "/etc/certs/ssl-cert-snakeoil.key",
+    "certificate": "/etc/certs/ssl-cert-snakeoil.pem",
     "iceConfig": {
       "iceServers": [{"urls": "stun:stun.l.google.com:19302"}]
     }

@@ -1,20 +1,12 @@
-FROM ubuntu:latest
-ARG DEBIAN_FRONTEND=noninteractive
+FROM node:14
 
-RUN apt-get update && \
-    apt-get -y upgrade && \
-    apt-get -y install \
-    apache2 \
-    ssl-cert
+# Create app directory
+WORKDIR /usr/src/app
+COPY . .
 
-RUN a2enmod ssl
-RUN a2enmod rewrite
-RUN a2enmod headers
-RUN a2enmod proxy
-RUN a2enmod proxy_http
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
 
 EXPOSE 443
-
-# By default start up apache in the foreground, override with /bin/bash for interative.
-CMD /usr/sbin/apache2ctl -D FOREGROUND
-    
+CMD [ "node", "server.js" ]
